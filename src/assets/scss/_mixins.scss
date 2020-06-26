@@ -1,0 +1,18 @@
+@mixin mobile-only() {
+  @media only screen and (max-width: $mobile-layout-width) {
+    @content;
+  }
+}
+
+@mixin thumbnail-size($howManyPerRow) {
+  width: thumbnailW($howManyPerRow);
+  height: 0;
+  padding: 0;
+  padding-top: thumbnailH($howManyPerRow);
+
+  @include mobile-only {
+    width: 100%;
+    padding: 0;
+    padding-top: 100% / $thumbnail-aspect-ratio;
+  }
+}

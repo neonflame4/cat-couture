@@ -1,0 +1,15 @@
+@function rems($val, $font-size: $font-size) {
+  @return 1rem * $val / $font-size;
+}
+
+@function thumbnailW($howManyPerRow: 4) {
+  $layout-width: rems($layout-width);
+  $margins-width: $howManyPerRow * $thumbnail-margin * 2;
+  $available-width: $layout-width - $margins-width - ($main-container-padding * 2);
+
+  @return $available-width / $howManyPerRow;
+}
+
+@function thumbnailH($howManyPerRow: 4) {
+  @return thumbnailW($howManyPerRow) / $thumbnail-aspect-ratio;
+}

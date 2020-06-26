@@ -1,28 +1,66 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <CatsHeader/>
+    <CatsGallery/>
   </div>
 </template>
 
-<script>
-import HelloWorld from './components/HelloWorld.vue'
 
-export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+<script>
+  import CatsHeader   from './components/CatsHeader.vue';
+  import CatsGallery  from './components/CatsGallery.vue';
+  import { EventBus } from './helper';
+  
+  export default {
+    name: 'App',
+    components: {
+      CatsHeader,
+      CatsGallery,
+    },
+    
+    data() {
+      return {
+        title: 'Cat Couture :: Fashionable. Fresh. Fabulously Feline.',
+      };
+    },
+    
+    mounted() {
+      document.title = this.title;
+      
+      window.onresize = () => {
+        EventBus.$emit( 'windowResize' );
+      };
+    },
+  };
 </script>
 
+
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+  @import "assets/scss/global";
+  
+  * {
+    box-sizing: border-box;
+  }
+  
+  body {
+    background: #fff6f2 url(assets/images/catbackground.jpg) repeat;
+    font-size: 16px;
+  }
+  
+  a {
+    color: #42b983;
+  }
+  
+  #app {
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    color: #2c3e50;
+    margin: 2rem auto;
+    padding: $main-container-padding;
+    width: 100%;
+    max-width: rems($layout-width);
+    background: #fff6f2;
+  }
 </style>

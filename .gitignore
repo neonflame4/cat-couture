@@ -1,6 +1,8 @@
 .DS_Store
 node_modules
 /dist
+/psd
+/src/assets/unprocessed
 
 # local env files
 .env.local
