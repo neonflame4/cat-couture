@@ -1,23 +1,23 @@
 <template>
-  <div class="thumbnail-wrapper">
-    <img class="thumbnail" :src="url" ref="thumbnail"/>
+  <div class="thumbnail-wrapper" @click="openGalleryItem">
+    <img class="thumbnail" :src="imageData.url" ref="thumbnail"/>
   </div>
 </template>
 
 
 <script>
   /* eslint-disable */
-  import { EventBus, px } from '../helper';
+  import { px }             from '../helper';
+  import { GalleryService } from '../GalleryService';
   
   export default {
     name: 'Thumbnail',
     props: {
-      url: String,
+      imageData: Object,
     },
     
     data() {
       return {
-        indexNum: '',
         thumbnail: '',
         wrapper: '',
         thumbnailRatio: 1,
@@ -49,10 +49,12 @@
         this.thumbnail.style.left = px( -( this.thumbnail.offsetWidth - this.wrapper.offsetWidth ) / 2 );
       },
       
+      openGalleryItem() {
+        GalleryService.openGalleryItem( this.imageData );
+      },
     },
     
     mounted() {
-      this.indexNum  = this.$vnode.key;
       this.thumbnail = this.$refs.thumbnail;
       this.wrapper   = this.thumbnail.parentElement;
       
@@ -64,7 +66,7 @@
       };
       
       /* Whenever window gets resized, re-fit thumbnails to wrapper */
-      EventBus.$on( 'windowResize', () => {
+      GalleryService.$on( 'windowResize', () => {
         this.scaleThumbnailImages();
       } );
     },

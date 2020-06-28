@@ -1,26 +1,32 @@
 <template>
   <div id="app">
-    <CatsHeader/>
-    <CatsGallery/>
+    <div id="app_content">
+      <CatsHeader/>
+      <CatsGallery/>
+    </div>
+    <Modal/>
   </div>
 </template>
 
 
 <script>
-  import CatsHeader   from './components/CatsHeader.vue';
-  import CatsGallery  from './components/CatsGallery.vue';
-  import { EventBus } from './helper';
+  import CatsHeader         from './components/CatsHeader.vue';
+  import CatsGallery        from './components/CatsGallery.vue';
+  import Modal              from './components/Modal.vue';
+  import { GalleryService } from './GalleryService';
   
   export default {
     name: 'App',
     components: {
       CatsHeader,
       CatsGallery,
+      Modal,
     },
     
     data() {
       return {
         title: 'Cat Couture :: Fashionable. Fresh. Fabulously Feline.',
+        galleryItems: {},
       };
     },
     
@@ -28,7 +34,7 @@
       document.title = this.title;
       
       window.onresize = () => {
-        EventBus.$emit( 'windowResize' );
+        GalleryService.$emit( 'windowResize' );
       };
     },
   };
@@ -57,10 +63,34 @@
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
     color: #2c3e50;
+  }
+  
+  #app_content {
     margin: 2rem auto;
     padding: $main-container-padding;
     width: 100%;
     max-width: rems($layout-width);
     background: #fff6f2;
+    box-shadow: .5em .5em 1em rgba(#000, .5);
+  }
+  
+  button {
+    appearance: none;
+    border-radius: 5px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+    color: white;
+    box-shadow: none;
+    border: none;
+    padding: .5rem 2rem;
+    cursor: pointer;
+    margin: 1rem;
+    background: $color-dark-purple;
+    transition: background .2s ease-in-out;
+    
+    &:hover {
+      background: $color-light-purple;
+    }
   }
 </style>

@@ -1,4 +1,4 @@
-# catscatscats
+# Cat Couture
 
 ## Project setup
 ```
