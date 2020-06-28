@@ -20,6 +20,7 @@
         indexNum: '',
         thumbnail: '',
         wrapper: '',
+        thumbnailRatio: 1,
         origWidth: px( 0 ),
         origHeight: px( 0 ),
       };
@@ -27,53 +28,25 @@
     
     methods: {
       scaleThumbnailImages() {
+        this.thumbnailRatio = this.thumbnail.width / this.thumbnail.height;
         
-        const thumbnail      = this.thumbnail,
-              wrapper        = this.wrapper,
-              thumbnailRatio = thumbnail.width / thumbnail.height,
-              isLandscape    = thumbnailRatio > 1,
-              isPortrait     = !isLandscape
-        ;
-        
-        if (isLandscape && wrapper.offsetHeight < this.origHeight) {
-          thumbnail.style.height = px( wrapper.offsetHeight );
-          thumbnail.style.width  = px( thumbnailRatio * thumbnail.offsetHeight );
-          /* set height to 100% */
-          console.log( 'COND1' );
-        }
-        else if (isLandscape && wrapper.offsetHeight >= this.origHeight) {
-          thumbnail.style.width  = px( wrapper.offsetWidth );
-          thumbnail.style.height = px( thumbnailRatio / thumbnail.offsetWidth );
-          console.log( 'COND2' );
-        }
-        else if (isPortrait && wrapper.offsetWidth < this.origWidth) {
-          thumbnail.style.width  = px( wrapper.offsetWidth );
-          thumbnail.style.height = px( thumbnail.offsetWidth / thumbnailRatio );
-          /* set height to 100% */
-          console.log( 'COND3' );
-        }
-        else if (isPortrait && wrapper.offsetWidth >= thumbnail.width) {
-          thumbnail.style.width  = px( wrapper.offsetWidth );
-          thumbnail.style.height = px( thumbnail.offsetWidth / thumbnailRatio );
-          console.log( 'COND4' );
-        }
-        
-        else {
-          console.log( 'ELSE' );
-        }
-        
-        // this._logDetais();
-        /* Adjust Positioning in Thumbnail Wrapper */
-        thumbnail.style.top  = px( -( thumbnail.offsetHeight - wrapper.offsetHeight ) / 2 );
-        thumbnail.style.left = px( -( thumbnail.offsetWidth - wrapper.offsetWidth ) / 2 );
+        this._fitThumbnailToWrapper();
+        this._centerThumbnailInWrapper();
       },
       
-      _logDetais() {
-        console.log( 'THUMBNAILS:' );
-        console.log( this.thumbnail.style.width, this.thumbnail.style.height );
+      _fitThumbnailToWrapper() {
+        this.thumbnail.style.height = px( this.wrapper.offsetHeight );
+        this.thumbnail.style.width  = px( this.thumbnailRatio * this.thumbnail.offsetHeight );
         
-        console.log( 'WRAPPERS:' );
-        console.log( this.wrapper.offsetWidth, this.wrapper.offsetHeight );
+        if (this.wrapper.offsetWidth > this.thumbnail.offsetWidth) {
+          this.thumbnail.style.width  = px( this.wrapper.offsetWidth );
+          this.thumbnail.style.height = px( this.thumbnail.offsetWidth / this.thumbnailRatio );
+        }
+      },
+      
+      _centerThumbnailInWrapper() {
+        this.thumbnail.style.top  = px( -( this.thumbnail.offsetHeight - this.wrapper.offsetHeight ) / 2 );
+        this.thumbnail.style.left = px( -( this.thumbnail.offsetWidth - this.wrapper.offsetWidth ) / 2 );
       },
       
     },
@@ -90,6 +63,7 @@
         this.scaleThumbnailImages();
       };
       
+      /* Whenever window gets resized, re-fit thumbnails to wrapper */
       EventBus.$on( 'windowResize', () => {
         this.scaleThumbnailImages();
       } );
