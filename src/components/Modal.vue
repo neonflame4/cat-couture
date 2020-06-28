@@ -81,7 +81,7 @@
     margin: 2rem auto;
     padding: 2rem;
     width: rems(900px);
-    max-width: 100%;
+    max-width: calc(100% - 2rem);
     min-height: rems(200px);
   }
   
@@ -112,13 +112,8 @@
   .imageLarge {
     > img {
       max-width: 100%;
-      max-height: 80vh;
-      
-      @include mobile-only {
-        max-height: 70vh;
-      }
+      max-height: 70vh;
     }
-    
   }
   
   @include mobile-only {
