@@ -3,7 +3,7 @@
     <div class="modal_wrapper_inner">
       <div class="modal_controls">
         <div class="btn close_modal" @click="close">
-          <i class="fa fa-times"></i>
+          <i class="fa fa-times"></i> close
         </div>
       </div>
       
@@ -83,6 +83,7 @@
     width: rems(900px);
     max-width: calc(100% - 2rem);
     min-height: rems(200px);
+    transition: all 1s ease-in-out;
   }
   
   .modal_wrapper_outer {
@@ -101,7 +102,7 @@
     position: absolute;
     right: .5rem;
     top: .5rem;
-    font-size: 2rem;
+    font-size: 1.5rem;
     cursor: pointer;
     
     &:hover {

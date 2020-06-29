@@ -104,7 +104,7 @@
       top: 0;
       height: auto;
       width: auto;
-      opacity: .6;
+      opacity: .8;
       transition: transform .2s ease-in-out, opacity .2s ease-in-out;
     }
   }

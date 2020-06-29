@@ -86,8 +86,11 @@
     padding: .5rem 2rem;
     cursor: pointer;
     margin: 1rem;
-    background: $color-dark-purple;
     transition: background .2s ease-in-out;
+    
+    &, &:active {
+      background: $color-dark-purple;
+    }
     
     &:hover {
       background: $color-light-purple;

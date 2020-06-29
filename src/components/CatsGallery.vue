@@ -6,7 +6,6 @@
             :key="index"
             :imageData="image"
     />
-    <!--            :url="image.url"-->
   </div>
 </template>
 

@@ -17,7 +17,7 @@ export const GalleryService = new Vue( {
     
     getPrevImage() {
       let prevGalleryItem = this.currentIndex - 1;
-      if (prevGalleryItem <= 0) {
+      if (prevGalleryItem <= -1) {
         prevGalleryItem = this.galleryImages.length - 1;
       }
       
