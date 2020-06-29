@@ -49,12 +49,9 @@
   }
   
   body {
-    background: #fff6f2 url(assets/images/catbackground.jpg) repeat;
+    background: #d1cbd9 url(assets/images/catbackground.jpg) repeat;
     font-size: 16px;
-  }
-  
-  a {
-    color: #42b983;
+    color: $color-dark-purple;
   }
   
   #app {
@@ -62,7 +59,6 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
-    color: #2c3e50;
   }
   
   #app_content {
@@ -77,7 +73,7 @@
   button {
     appearance: none;
     border-radius: 5px;
-    font-size: 1.5rem;
+    font-size: 1rem;
     font-weight: bold;
     text-align: center;
     color: white;
@@ -87,13 +83,11 @@
     cursor: pointer;
     margin: 1rem;
     transition: background .2s ease-in-out;
-    
-    &, &:active {
-      background: $color-dark-purple;
-    }
+    background: $color-dark-purple;
     
     &:hover {
       background: $color-light-purple;
+      
     }
   }
 </style>

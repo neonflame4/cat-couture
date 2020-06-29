@@ -3,7 +3,7 @@
     <div class="modal_wrapper_inner">
       <div class="modal_controls">
         <div class="btn close_modal" @click="close">
-          <i class="fa fa-times"></i> close
+          <i class="fa fa-times"></i><span class="closeText"> close</span>
         </div>
       </div>
       
@@ -105,10 +105,35 @@
     font-size: 1.5rem;
     cursor: pointer;
     
+    .closeText {
+      width: 1px;
+      opacity: .01;
+      overflow: hidden;
+      transition: width .4s ease-in-out;
+    }
+    
+    * {
+      display: inline-block;
+      vertical-align: middle;
+    }
+    
     &:hover {
       color: red;
+      
+      .closeText {
+        width: rems(65px);
+        opacity: 1;
+      }
     }
+    
+    
   }
+  
+  .imageTitle {
+    font-weight: 900;
+    font-size: 1.5rem;
+  }
+  
   
   .imageLarge {
     > img {
