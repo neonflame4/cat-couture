@@ -22,16 +22,17 @@
   @import "../assets/scss/global";
   
   h1 {
-    font-family: "Arial";
     text-transform: uppercase;
     
     .header_couture {
-      font-family: "Arial Black";
+      font-family: trade-gothic-next, sans-serif;
+      font-weight: 800;
     }
   }
   
   .subtitle {
-    font-family: "Arial Narrow";
+    font-family: trade-gothic-next, sans-serif;
+    font-weight: 300;
     font-size: .8em;
     color: $color-light-purple;
   }

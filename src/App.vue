@@ -55,7 +55,9 @@
   }
   
   #app {
-    font-family: Avenir, Helvetica, Arial, sans-serif;
+    font-family: trade-gothic-next, sans-serif;
+    font-weight: 400;
+    font-style: normal;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
