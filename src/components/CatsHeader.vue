@@ -11,9 +11,6 @@
 <script>
   export default {
     name: 'CatsHeader',
-    props: {
-      msg: String,
-    },
   };
 </script>
 
