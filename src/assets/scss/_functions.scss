@@ -13,3 +13,4 @@
 @function thumbnailH($howManyPerRow: 4) {
   @return thumbnailW($howManyPerRow) / $thumbnail-aspect-ratio;
 }
+

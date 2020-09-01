@@ -9,28 +9,28 @@
 
 
 <script>
-  export default {
-    name: 'CatsHeader',
-  };
+export default {
+  name: 'CatsHeader',
+};
 </script>
 
 
 <style scoped lang="scss">
-  @import "../assets/scss/global";
-  
-  h1 {
-    text-transform: uppercase;
-    
-    .header_couture {
-      font-family: trade-gothic-next, sans-serif;
-      font-weight: 800;
-    }
-  }
-  
-  .subtitle {
+@import "../assets/scss/global";
+
+h1 {
+  text-transform: uppercase;
+
+  .header_couture {
     font-family: trade-gothic-next, sans-serif;
-    font-weight: 300;
-    font-size: .8em;
-    color: $color-light-purple;
+    font-weight: 800;
   }
+}
+
+.subtitle {
+  font-family: trade-gothic-next, sans-serif;
+  font-weight: 300;
+  font-size: .8em;
+  color: $color-light-purple;
+}
 </style>
