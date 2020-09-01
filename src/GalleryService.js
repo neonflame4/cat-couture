@@ -33,6 +33,22 @@ export const GalleryService = new Vue( {
       this.openGalleryItem( this.galleryImages[ nextGalleryItem ] );
     },
     
+    filterGalleryItems( searchCriterea ) {
+      if (searchCriterea === '') {
+        this.resetGallery();
+        return;
+      }
+      
+      let filteredGalleryItems = this.galleryImages.filter( item => {
+        return item.title.toLowerCase().includes( searchCriterea.toLowerCase() );
+      } );
+      
+      this.$emit( 'galleryImagesUpdate', filteredGalleryItems );
+    },
+    
+    resetGallery() {
+      this.$emit( 'galleryImagesUpdate', this.galleryImages );
+    },
   },
   
   created() {

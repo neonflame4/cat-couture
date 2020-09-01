@@ -3,17 +3,17 @@
     <div class="modal_wrapper_inner">
       <div class="modal_controls">
         <div class="btn close_modal" @click="close">
-          <i class="fa fa-times"></i><span class="closeText"> close</span>
+          <i class="fa fa-times"></i>
         </div>
       </div>
-      
+
       <div class="gallery">
         <h3 class="imageTitle">{{ imageTitle }}</h3>
         <div class="imageLarge">
           <img :src="imageUrl" :alt="imageTitle">
         </div>
       </div>
-      
+
       <div class="gallery_controls">
         <button class="prev" @click="prevGalleryItem">Previous</button>
         <button class="next" @click="nextGalleryItem">Next</button>
@@ -24,134 +24,120 @@
 
 
 <script>
-  import { GalleryService } from '../GalleryService';
-  
-  export default {
-    name: 'Modal',
-    data() {
-      return {
-        hidden: true,
-        imageTitle: '',
-        imageUrl: '',
-      };
+import { GalleryService } from '../GalleryService';
+
+export default {
+  name: 'Modal',
+  data() {
+    return {
+      hidden: true,
+      imageTitle: '',
+      imageUrl: '',
+    };
+  },
+
+  methods: {
+    open() {
+      this.hidden = false;
     },
-    
-    methods: {
-      open() {
-        this.hidden = false;
-      },
-      
-      close() {
-        this.hidden = true;
-      },
-      
-      nextGalleryItem() {
-        GalleryService.getNextImage();
-      },
-      
-      prevGalleryItem() {
-        GalleryService.getPrevImage();
-      },
+
+    close() {
+      this.hidden = true;
     },
-    
-    mounted() {
-      GalleryService.$on( 'openGalleryItem', function ( payload ) {
-        this.open();
-        
-        this.imageTitle = payload.title;
-        this.imageUrl   = payload.url;
-      }.bind( this ) );
+
+    nextGalleryItem() {
+      GalleryService.getNextImage();
     },
-  };
+
+    prevGalleryItem() {
+      GalleryService.getPrevImage();
+    },
+  },
+
+  mounted() {
+    GalleryService.$on( 'openGalleryItem', function ( payload ) {
+      this.open();
+
+      this.imageTitle = payload.title;
+      this.imageUrl   = payload.url;
+    }.bind( this ) );
+  },
+};
 </script>
 
 
 <style scoped lang="scss">
-  @import "../assets/scss/global";
-  
-  :host {
-    font-size: 1rem;
+@import "../assets/scss/global";
+
+/* Modal Generic Styles */
+:host {
+  font-size: 1rem;
+}
+
+.modal_wrapper_inner {
+  display: block;
+  position: relative;
+  background: white;
+  border-radius: 5px;
+  margin: 2rem auto;
+  padding: 2rem;
+  width: rems(900px);
+  max-width: calc(100% - 2rem);
+  min-height: rems(200px);
+  transition: all 1s ease-in-out;
+}
+
+.modal_wrapper_outer {
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  left: 0;
+  top: 0;
+  background: rgba(#000, .8);
+}
+
+.btn.close_modal {
+  position: absolute;
+  right: .5rem;
+  top: .5rem;
+  font-size: 1.5rem;
+  cursor: pointer;
+
+  * {
+    display: inline-block;
+    vertical-align: middle;
   }
-  
-  .modal_wrapper_inner {
-    display: block;
-    position: relative;
-    background: white;
-    border-radius: 5px;
-    margin: 2rem auto;
-    padding: 2rem;
-    width: rems(900px);
-    max-width: calc(100% - 2rem);
-    min-height: rems(200px);
-    transition: all 1s ease-in-out;
+
+  &:hover {
+    color: red;
   }
-  
-  .modal_wrapper_outer {
-    display: block;
-    width: 100%;
-    height: 100%;
-    position: fixed;
-    overflow-x: hidden;
-    overflow-y: scroll;
-    left: 0;
-    top: 0;
-    background: rgba(#000, .8);
+}
+
+/* Gallery Styles */
+.imageTitle {
+  font-weight: 900;
+  font-size: 1.5rem;
+}
+
+
+.imageLarge {
+  > img {
+    max-width: 100%;
+    max-height: 70vh;
   }
-  
-  .btn.close_modal {
-    position: absolute;
-    right: .5rem;
-    top: .5rem;
-    font-size: 1.5rem;
-    cursor: pointer;
-    
-    .closeText {
-      width: 1px;
-      opacity: .01;
-      overflow: hidden;
-      transition: width .4s ease-in-out;
-    }
-    
-    * {
-      display: inline-block;
-      vertical-align: middle;
-    }
-    
-    &:hover {
-      color: red;
-      
-      .closeText {
-        width: rems(65px);
-        opacity: 1;
-      }
-    }
-    
-    
-  }
-  
-  .imageTitle {
-    font-weight: 900;
-    font-size: 1.5rem;
-  }
-  
-  
-  .imageLarge {
-    > img {
-      max-width: 100%;
-      max-height: 70vh;
+}
+
+@include mobile-only {
+  .gallery_controls {
+    display: flex;
+
+    button {
+      width: 50%;
     }
   }
-  
-  @include mobile-only {
-    .gallery_controls {
-      display: flex;
-      
-      button {
-        padding: .5rem;
-        width: 50%;
-        margin: .5rem;
-      }
-    }
-  }
+}
 
 </style>

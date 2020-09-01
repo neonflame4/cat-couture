@@ -70,6 +70,10 @@
         this.scaleThumbnailImages();
       } );
     },
+    
+    updated() {
+      this.scaleThumbnailImages();
+    },
   };
 </script>
 
