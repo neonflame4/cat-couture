@@ -12,6 +12,10 @@
       <button @click="filterGalleryItems" class="gallery_filter_button">Filter</button>
     </div>
     <div class="thumbnail_container">
+      <template v-if="!galleryImages.length">
+        <h2>Sorry, no mouse for you.</h2>
+        <p>Looks like your search didn't come up with any results.</p>
+      </template>
       <Thumbnail
           v-for="(image, index) in galleryImages"
           :key="index"
